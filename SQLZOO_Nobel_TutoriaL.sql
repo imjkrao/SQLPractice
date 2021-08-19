@@ -104,3 +104,42 @@ Show year, subject, and name of people who won a 'Medicine' prize in an early ye
 
 select * from nobel
 where (subject='Medicine' and yr<1910) or (subject='Literature' and yr>=2004)
+
+11.
+
+Find all details of the prize won by PETER GRÜNBERG 
+select * from nobel
+where winner like 'PETER GR%NBERG'
+
+
+12.
+
+Find all details of the prize won by EUGENE O'NEILL 
+note:You can't put a single quote in a quote string directly. You can use two single quotes within a quoted string.
+SELECT * from nobel
+where winner='EUGENE O''NEILL'
+
+13.
+
+Knights in order
+
+List the winners, year and subject where the winner starts with Sir. Show the the most recent first, then by name order.
+
+select winner,yr, subject from nobel
+where winner like 'Sir%'
+order by yr desc,winner
+
+
+14.
+
+The expression subject IN ('Chemistry','Physics') can be used as a value - it will be 0 or 1.
+
+Show the 1984 winners and subject ordered by subject and winner name; but list Chemistry and Physics last.
+
+select winner, subject
+from nobel
+where yr = '1984'
+order by ( case
+           when subject in ('Chemistry','Physics') then 1
+           else 0
+           end) , subject, winner
